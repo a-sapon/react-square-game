@@ -8,7 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import animation from './styles/animation.module.css';
 import { getGameSettings } from '../../redux/operations';
 import { connect } from 'react-redux';
-import { setUserName, startGame } from '../../redux/actionCreators';
+import { setUserName } from '../../redux/actionCreators';
 
 const StyledButton = styled(Button)({
   background: 'linear-gradient(45deg, #474747 30%, #808080 90%)',
@@ -36,7 +36,6 @@ class SubmitForm extends Component {
     }
     this.props.getGameSettings(mode);
     this.props.setUserName(name);
-    this.props.startGame();
   };
 
   render() {
@@ -65,4 +64,4 @@ class SubmitForm extends Component {
   }
 }
 
-export default connect(null, { getGameSettings, setUserName, startGame })(SubmitForm);
+export default connect(null, { getGameSettings, setUserName })(SubmitForm);

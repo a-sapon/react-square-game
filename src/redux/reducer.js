@@ -3,7 +3,8 @@ import Type from './types';
 const INIT_STATE = {
   fieldBlocksNum: 0,
   delay: 0,
-  isGameOn: false,
+  arrForBlocksRender: [],
+  // isGameOn: false,
   user: {
     name: '',
     points: 0,
@@ -33,19 +34,29 @@ export const reducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         user: {...state.user, name: action.name}
-      }
-
-
-    case Type.START_GAME:
-      return {
-        ...state,
-        isGameOn: true
       };
-    case Type.END_GAME:
+    case Type.FILL_ARRAY:
       return {
         ...state,
-        isGameOn: false
-      }
+        arrForBlocksRender: action.arr
+      };
+    case Type.MAKE_BLUE:
+      return {
+        ...state,
+        arrForBlocksRender: []
+      };
+
+
+    // case Type.START_GAME:
+    //   return {
+    //     ...state,
+    //     isGameOn: true
+    //   };
+    // case Type.END_GAME:
+    //   return {
+    //     ...state,
+    //     isGameOn: false
+    //   }
 
       default:
         return state;

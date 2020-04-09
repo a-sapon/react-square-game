@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { fetchGameMode, fetchGameDelay } from './actionCreators';
+import { fetchGameMode, fetchGameDelay, fillArrWithBlocks } from './actionCreators';
+// const blue = '#0066ff';
+// const red = '#ff1a1a';
+// const green = '#00cc00';
 
 export const getGameSettings = mode => async dispatch => {
   const response = await axios.get(
@@ -11,4 +14,28 @@ export const getGameSettings = mode => async dispatch => {
       dispatch(fetchGameDelay(response.data[key].delay));
     }
   }
+};
+
+export const fillArray = num => dispatch => {
+  const resultArray = [];
+  for (let i = 0; i < num; i += 1) {
+    const block = {
+      id: i,
+      bgColor: '',
+    };
+    resultArray.push(block);
+  }
+  dispatch(fillArrWithBlocks(resultArray));
+}
+
+export const makeBlockBlue = (arr) => {
+  // const randomNum = Math.round(Math.random() * (arr.length - 1));
+  // arr.forEach(({ id, bgColor }) => {
+  //   if (bgColor === '') {}
+  // });
+  if (arr.length === 0) {
+    return;
+  }
+  console.log(arr, '!!')
+  
 };
