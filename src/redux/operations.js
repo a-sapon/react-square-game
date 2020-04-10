@@ -27,15 +27,3 @@ export const fillArray = num => dispatch => {
   }
   dispatch(fillArrWithBlocks(resultArray));
 }
-
-export const makeBlockBlue = (arr) => {
-  // const randomNum = Math.round(Math.random() * (arr.length - 1));
-  // arr.forEach(({ id, bgColor }) => {
-  //   if (bgColor === '') {}
-  // });
-  if (arr.length === 0) {
-    return;
-  }
-  console.log(arr, '!!')
-  
-};

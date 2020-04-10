@@ -4,10 +4,10 @@ import GameField from './gameField/GameField';
 import { connect } from 'react-redux';
 import style from './App.module.css';
 
-const App = ({ fieldBlocksNum }) => (
+const App = ({ blocksNum }) => (
   <>
     <SubmitForm />
-    {fieldBlocksNum > 0 && (
+    {blocksNum > 0 && (
       <div className={style.fieldWrapper}>
         <GameField />
       </div>
@@ -16,7 +16,7 @@ const App = ({ fieldBlocksNum }) => (
 );
 
 const mapStateToProps = (state) => ({
-  fieldBlocksNum: state.fieldBlocksNum,
+  blocksNum: state.mainReducer.fieldBlocksNum
 });
 
 export default connect(mapStateToProps)(App);

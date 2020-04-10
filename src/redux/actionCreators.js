@@ -20,9 +20,9 @@ export const fillArrWithBlocks = (arr) => ({
   arr
 });
 
-export const makeBlue = (color) => ({
+export const makeBlue = (id) => ({
   type: Type.MAKE_BLUE,
-  color
+  id
 })
 
 
