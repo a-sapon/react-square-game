@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import styles from './GameField.module.css';
 import { connect } from 'react-redux';
 import { fillArray } from '../../redux/operations';
-import { makeBlue } from '../../redux/actionCreators';
+import { makeBlue, makeRed } from '../../redux/actionCreators';
+const blue = '#0066ff';
 
 class GameField extends Component {
   state = {
@@ -10,12 +11,13 @@ class GameField extends Component {
   };
 
   componentDidMount() {
-    const { fillArray, blocksNum } = this.props;
+    const { fillArray, blocksNum, delay } = this.props;
     this.setWidth();
     fillArray(blocksNum);
     setInterval(() => {
-      this.getRandomBlock();
-    }, 2000);
+      this.makeRandomBlockBlue();
+      this.makeBlockRed();
+    }, delay);
   }
 
   setWidth() {
@@ -34,16 +36,31 @@ class GameField extends Component {
     }
   }
 
-  getRandomBlock() {
+  makeRandomBlockBlue() {
     const { arr, makeBlue } = this.props;
     const randomNum = Math.round(Math.random() * (arr.length - 1));
     if (arr[randomNum].bgColor === '') {
+      console.log(arr[randomNum])
       makeBlue(randomNum);
     } else {
-      this.getRandomBlock();
+      this.makeRandomBlockBlue();
       // remove once all blocks are painted
     }
   }
+
+  makeBlockRed() {
+    const { arr, delay, makeRed } = this.props;
+    arr.forEach(({ id, bgColor }) => {
+      setTimeout(() => {
+        if (bgColor === blue) {
+          console.log(id);
+          makeRed(id)
+        }
+      }, delay);
+    })
+  }
+
+  makeBlockGreen() {}
 
   render() {
     const { width } = this.state;
@@ -63,7 +80,8 @@ class GameField extends Component {
 
 const mapStateToProps = (state) => ({
   blocksNum: state.mainReducer.fieldBlocksNum,
-  arr: state.blocksReducer
+  arr: state.blocksReducer,
+  delay: state.mainReducer.delay
 });
 
-export default connect(mapStateToProps, { fillArray, makeBlue })(GameField);
+export default connect(mapStateToProps, { fillArray, makeBlue, makeRed })(GameField);

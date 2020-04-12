@@ -1,8 +1,5 @@
 import axios from 'axios';
 import { fetchGameMode, fetchGameDelay, fillArrWithBlocks } from './actionCreators';
-// const blue = '#0066ff';
-// const red = '#ff1a1a';
-// const green = '#00cc00';
 
 export const getGameSettings = mode => async dispatch => {
   const response = await axios.get(

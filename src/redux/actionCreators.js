@@ -23,7 +23,17 @@ export const fillArrWithBlocks = (arr) => ({
 export const makeBlue = (id) => ({
   type: Type.MAKE_BLUE,
   id
-})
+});
+
+export const makeRed = (id) => ({
+  type: Type.MAKE_RED,
+  id
+});
+
+export const makeGreen = (id) => ({
+  type: Type.MAKE_GREEN,
+  id
+});
 
 
 
