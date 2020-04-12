@@ -1,46 +1,52 @@
 import Type from './types';
 
-export const fetchGameMode = (mode) => ({
+export const fetchGameMode = mode => ({
   type: Type.GET_GAME_MODE,
-  mode,
+  mode
 });
 
-export const fetchGameDelay = (delay) => ({
+export const fetchGameDelay = delay => ({
   type: Type.GET_GAME_DELAY,
-  delay,
+  delay
 });
 
-export const setUserName = (name) => ({
+export const setUserName = name => ({
   type: Type.SET_USERNAME,
   name
 });
 
-export const fillArrWithBlocks = (arr) => ({
+export const fillArrWithBlocks = arr => ({
   type: Type.FILL_ARRAY,
   arr
 });
 
-export const makeBlue = (id) => ({
+export const makeBlue = id => ({
   type: Type.MAKE_BLUE,
   id
 });
 
-export const makeRed = (id) => ({
+export const makeRed = id => ({
   type: Type.MAKE_RED,
   id
 });
 
-export const makeGreen = (id) => ({
+export const makeGreen = id => ({
   type: Type.MAKE_GREEN,
   id
 });
 
+export const addUserPoint = () => ({
+  type: Type.ADD_USER_POINT
+});
 
+export const addPcPoint = () => ({
+  type: Type.ADD_PC_POINT
+});
 
-// export const startGame = () => ({
-//   type: Type.START_GAME
-// });
+export const userWins = () => ({
+  type: Type.USER_WINS
+});
 
-// export const endGame = () => ({
-//   type: Type.END_GAME
-// });
+export const pcWins = () => ({
+  type: Type.PC_WINS
+})
