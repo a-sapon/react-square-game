@@ -21,7 +21,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"
   },
-  "homepage": "https://a-sapon.github.io/square-game",
+  "homepage": "https://a-sapon.github.io/react-square-game",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
