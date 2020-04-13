@@ -15,15 +15,15 @@ const StyledButton = styled(Button)({
   color: 'white',
   height: 40,
   padding: '0 30px',
-  marginTop: '8px',
+  marginTop: '8px'
 });
 
 class SubmitForm extends Component {
   state = {
-    showErr: false,
+    showErr: false
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = async e => {
     const { getGameSettings, setUserName, resetState } = this.props;
     e.preventDefault();
     resetState();
@@ -68,7 +68,11 @@ class SubmitForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  isGameOn: state.mainReducer.isGameOn
+  isGameOn: state.appReducer.mainReducer.isGameOn
 });
 
-export default connect(mapStateToProps, { getGameSettings, setUserName, resetState })(SubmitForm);
+export default connect(mapStateToProps, {
+  getGameSettings,
+  setUserName,
+  resetState
+})(SubmitForm);

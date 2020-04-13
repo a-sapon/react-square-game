@@ -4,21 +4,21 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 136,
+    minWidth: 136
   },
   selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
+    marginTop: theme.spacing(2)
+  }
 }));
 
 export default function ModeSelect() {
   const classes = useStyles();
   const [mode, setMode] = React.useState('');
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     setMode(event.target.value);
   };
   return (

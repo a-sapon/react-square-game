@@ -13,6 +13,7 @@ import {
 const blue = 'rgb(0, 102, 255)';
 const green = 'rgb(0, 204, 0)';
 const red = 'rgb(255, 26, 26)';
+let intervalId;
 
 class GameField extends Component {
   state = {
@@ -23,11 +24,22 @@ class GameField extends Component {
     const { fillArray, blocksNum, delay, isGameOn } = this.props;
     this.setWidth();
     fillArray(blocksNum);
-    const intervalId = setInterval(() => {
+
+    if (intervalId !== undefined) {
+      clearInterval(intervalId);
+    }
+    intervalId = setInterval(() => {
       this.makeRandomBlockBlue();
       this.makeBlockRed();
     }, delay);
     !isGameOn && clearInterval(intervalId);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { user, arr } = this.props;
+    if (prevProps.user.points !== user.points) {
+      this.readyToCheckWinner(arr);
+    }
   }
 
   makeRandomBlockBlue() {
@@ -66,16 +78,9 @@ class GameField extends Component {
   }
 
   areAllBlocksPainted(arr) {
-    const { endGame } = this.props;
+    const { endGame, isGameOn } = this.props;
     if (arr.every(el => el.bgColor !== '')) {
-      endGame();
-    }
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    const { user, arr } = this.props;
-    if (prevProps.user.points !== user.points) {
-      this.readyToCheckWinner(arr);
+      isGameOn && endGame();
     }
   }
 
@@ -125,12 +130,12 @@ class GameField extends Component {
 }
 
 const mapStateToProps = state => ({
-  blocksNum: state.mainReducer.fieldBlocksNum,
-  arr: state.blocksReducer,
-  delay: state.mainReducer.delay,
-  user: state.userReducer,
-  pc: state.pcReducer,
-  isGameOn: state.mainReducer.isGameOn
+  blocksNum: state.appReducer.mainReducer.fieldBlocksNum,
+  arr: state.appReducer.blocksReducer,
+  delay: state.appReducer.mainReducer.delay,
+  user: state.appReducer.userReducer,
+  pc: state.appReducer.pcReducer,
+  isGameOn: state.appReducer.mainReducer.isGameOn
 });
 
 export default connect(mapStateToProps, {

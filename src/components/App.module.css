@@ -2,6 +2,12 @@
   display: flex;
 }
 
-.gameContainer, .leadersContainer {
+.gameSection, .leadersSection {
   width: 50vw;
+}
+
+.leadersSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -58,3 +58,8 @@ export const endGame = () => ({
 export const resetState = () => ({
   type: Type.RESET_STATE
 });
+
+export const fetchWinners = winners => ({
+  type: Type.GET_WINNERS,
+  winners
+});

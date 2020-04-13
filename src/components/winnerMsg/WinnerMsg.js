@@ -9,8 +9,8 @@ const WinnerMsg = ({ user, pc }) => (
 );
 
 const mapStateToProps = state => ({
-  user: state.userReducer,
-  pc: state.pcReducer
+  user: state.appReducer.userReducer,
+  pc: state.appReducer.pcReducer
 });
 
 export default connect(mapStateToProps)(WinnerMsg);

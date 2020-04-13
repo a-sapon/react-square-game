@@ -1,0 +1,11 @@
+.winnersList {
+  min-width: 384px;
+}
+
+.winnersHdr {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #474747;
+  margin-bottom: 0;
+}

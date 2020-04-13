@@ -10,7 +10,7 @@ const INIT_STATE = {
   isGameOn: true
 };
 
-export const mainReducer = (state = INIT_STATE, action) => {
+const mainReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case Type.GET_GAME_MODE:
       return { ...state, fieldBlocksNum: action.mode * action.mode };
@@ -23,7 +23,7 @@ export const mainReducer = (state = INIT_STATE, action) => {
   }
 };
 
-export const blocksReducer = (state = [], action) => {
+const blocksReducer = (state = [], action) => {
   const targetObj = state.find(obj => obj.id === action.id);
   switch (action.type) {
     case Type.FILL_ARRAY:
@@ -48,7 +48,7 @@ const INIT_USER = {
   isWinner: false
 };
 
-export const userReducer = (state = INIT_USER, action) => {
+const userReducer = (state = INIT_USER, action) => {
   switch (action.type) {
     case Type.SET_USERNAME:
       return { ...state, name: action.name };
@@ -67,7 +67,7 @@ const INIT_PC = {
   isWinner: false
 };
 
-export const pcReducer = (state = INIT_PC, action) => {
+const pcReducer = (state = INIT_PC, action) => {
   switch (action.type) {
     case Type.ADD_PC_POINT:
       return { ...state, points: state.points + 1 };
@@ -78,16 +78,25 @@ export const pcReducer = (state = INIT_PC, action) => {
   }
 };
 
-export const appReducer = combineReducers({
+export const leaderBoardReducer = (state = [], action) => {
+  switch (action.type) {
+    case Type.GET_WINNERS:
+      return action.winners;
+    default:
+      return state;
+  }
+};
+
+export const combinedReducer = combineReducers({
   mainReducer,
   blocksReducer,
   userReducer,
   pcReducer
 });
 
-export const rootReducer = (state, action) => {
+export const appReducer = (state, action) => {
   if (action.type === Type.RESET_STATE) {
     state = undefined;
   }
-  return appReducer(state, action);
+  return combinedReducer(state, action);
 };
