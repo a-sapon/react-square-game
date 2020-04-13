@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import styles from './GameField.module.css';
 import { connect } from 'react-redux';
 import { fillArray, checkWinner } from '../../redux/operations';
-import { makeBlue, makeRed, makeGreen, addUserPoint, addPcPoint } from '../../redux/actionCreators';
+import {
+  makeBlue,
+  makeRed,
+  makeGreen,
+  addUserPoint,
+  addPcPoint,
+  endGame
+} from '../../redux/actionCreators';
 const blue = 'rgb(0, 102, 255)';
 const green = 'rgb(0, 204, 0)';
-let intervalId;
+const red = 'rgb(255, 26, 26)';
 
 class GameField extends Component {
   state = {
@@ -13,22 +20,23 @@ class GameField extends Component {
   };
 
   componentDidMount() {
-    const { fillArray, blocksNum, delay } = this.props;
+    const { fillArray, blocksNum, delay, isGameOn } = this.props;
     this.setWidth();
     fillArray(blocksNum);
-    intervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       this.makeRandomBlockBlue();
       this.makeBlockRed();
     }, delay);
+    !isGameOn && clearInterval(intervalId);
   }
 
   makeRandomBlockBlue() {
-    const { arr, makeBlue } = this.props;
+    const { arr, makeBlue, isGameOn } = this.props;
     const randomNum = Math.round(Math.random() * (arr.length - 1));
     if (arr[randomNum].bgColor === '') {
       makeBlue(randomNum);
     } else {
-      this.makeRandomBlockBlue();
+      isGameOn && this.makeRandomBlockBlue();
     }
     this.areAllBlocksPainted(arr);
   }
@@ -41,8 +49,9 @@ class GameField extends Component {
       }
       setTimeout(() => {
         if (el.bgColor === blue) {
-          makeRed(el.id);
           addPcPoint();
+          makeRed(el.id);
+          this.readyToCheckWinner(arr);
         }
       }, delay);
     });
@@ -51,16 +60,29 @@ class GameField extends Component {
   makeBlockGreen(e) {
     const { makeGreen, addUserPoint } = this.props;
     if (e.target.style.backgroundColor === blue) {
+      addUserPoint();
       makeGreen(Number(e.target.dataset.id));
-      addUserPoint()
     }
   }
 
   areAllBlocksPainted(arr) {
-    const { checkWinner, blocksNum, user, pc } = this.props;
+    const { endGame } = this.props;
     if (arr.every(el => el.bgColor !== '')) {
+      endGame();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { user, arr } = this.props;
+    if (prevProps.user.points !== user.points) {
+      this.readyToCheckWinner(arr);
+    }
+  }
+
+  readyToCheckWinner(arr) {
+    const { checkWinner, blocksNum, user, pc } = this.props;
+    if (arr.every(el => el.bgColor === green || el.bgColor === red)) {
       checkWinner(blocksNum, user, pc);
-      clearInterval(intervalId);
     }
   }
 
@@ -107,7 +129,8 @@ const mapStateToProps = state => ({
   arr: state.blocksReducer,
   delay: state.mainReducer.delay,
   user: state.userReducer,
-  pc: state.pcReducer
+  pc: state.pcReducer,
+  isGameOn: state.mainReducer.isGameOn
 });
 
 export default connect(mapStateToProps, {
@@ -117,5 +140,6 @@ export default connect(mapStateToProps, {
   makeGreen,
   addUserPoint,
   addPcPoint,
-  checkWinner
+  checkWinner,
+  endGame
 })(GameField);

@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { fetchGameMode, fetchGameDelay, fillArrWithBlocks, userWins, pcWins } from './actionCreators';
+import {
+  fetchGameMode,
+  fetchGameDelay,
+  fillArrWithBlocks,
+  userWins,
+  pcWins
+} from './actionCreators';
 
 export const getGameSettings = mode => async dispatch => {
   const response = await axios.get(
@@ -18,18 +24,20 @@ export const fillArray = num => dispatch => {
   for (let i = 0; i < num; i += 1) {
     const block = {
       id: i,
-      bgColor: '',
+      bgColor: ''
     };
     resultArray.push(block);
   }
   dispatch(fillArrWithBlocks(resultArray));
-}
+};
 
 export const checkWinner = (blocksNum, user, pc) => dispatch => {
+  console.log('user.points', user.points)
+  console.log('pc.points', pc.points)
   const fiftyPercent = blocksNum * 0.5;
   if (user.points > fiftyPercent) {
     dispatch(userWins());
   } else if (pc.points > fiftyPercent) {
     dispatch(pcWins());
   }
-}
+};

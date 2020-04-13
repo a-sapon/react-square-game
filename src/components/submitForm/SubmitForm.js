@@ -8,7 +8,7 @@ import { CSSTransition } from 'react-transition-group';
 import animation from './styles/animation.module.css';
 import { getGameSettings } from '../../redux/operations';
 import { connect } from 'react-redux';
-import { setUserName } from '../../redux/actionCreators';
+import { setUserName, resetState } from '../../redux/actionCreators';
 
 const StyledButton = styled(Button)({
   background: 'linear-gradient(45deg, #474747 30%, #808080 90%)',
@@ -24,7 +24,9 @@ class SubmitForm extends Component {
   };
 
   handleSubmit = async (e) => {
+    const { getGameSettings, setUserName, resetState } = this.props;
     e.preventDefault();
+    resetState();
     const mode = e.currentTarget.elements.mode.value;
     const name = e.currentTarget.elements.name.value;
     if (mode === '' || name === '') {
@@ -34,19 +36,20 @@ class SubmitForm extends Component {
       }, 2500);
       return;
     }
-    this.props.getGameSettings(mode);
-    this.props.setUserName(name);
+    getGameSettings(mode);
+    setUserName(name);
   };
 
   render() {
     const { showErr } = this.state;
+    const { isGameOn } = this.props;
     return (
       <>
         <form onSubmit={this.handleSubmit} className={style.submitForm}>
           <ModeSelect />
           <NameInput />
           <StyledButton type='submit' variant='contained'>
-            Play
+            {isGameOn ? 'Play' : 'Play again'}
           </StyledButton>
         </form>
         <CSSTransition
@@ -64,4 +67,8 @@ class SubmitForm extends Component {
   }
 }
 
-export default connect(null, { getGameSettings, setUserName })(SubmitForm);
+const mapStateToProps = state => ({
+  isGameOn: state.mainReducer.isGameOn
+});
+
+export default connect(mapStateToProps, { getGameSettings, setUserName, resetState })(SubmitForm);

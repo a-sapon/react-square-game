@@ -49,4 +49,12 @@ export const userWins = () => ({
 
 export const pcWins = () => ({
   type: Type.PC_WINS
-})
+});
+
+export const endGame = () => ({
+  type: Type.END_GAME
+});
+
+export const resetState = () => ({
+  type: Type.RESET_STATE
+});

@@ -1,0 +1,9 @@
+.winnerContainer {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #474747;
+}

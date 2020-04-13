@@ -1,25 +1,23 @@
 import Type from './types';
+import { combineReducers } from 'redux';
 const blue = 'rgb(0, 102, 255)';
 const red = 'rgb(255, 26, 26)';
 const green = 'rgb(0, 204, 0)';
 
 const INIT_STATE = {
   fieldBlocksNum: 0,
-  delay: 0
+  delay: 0,
+  isGameOn: true
 };
 
 export const mainReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case Type.GET_GAME_MODE:
-      return {
-        ...state,
-        fieldBlocksNum: action.mode * action.mode
-      };
+      return { ...state, fieldBlocksNum: action.mode * action.mode };
     case Type.GET_GAME_DELAY:
-      return {
-        ...state,
-        delay: action.delay
-      };
+      return { ...state, delay: action.delay };
+    case Type.END_GAME:
+      return { ...state, isGameOn: false };
     default:
       return state;
   }
@@ -78,4 +76,18 @@ export const pcReducer = (state = INIT_PC, action) => {
     default:
       return state;
   }
+};
+
+export const appReducer = combineReducers({
+  mainReducer,
+  blocksReducer,
+  userReducer,
+  pcReducer
+});
+
+export const rootReducer = (state, action) => {
+  if (action.type === Type.RESET_STATE) {
+    state = undefined;
+  }
+  return appReducer(state, action);
 };

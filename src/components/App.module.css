@@ -1,3 +1,7 @@
-.fieldWrapper {
+.mainContainer {
+  display: flex;
+}
+
+.gameContainer, .leadersContainer {
   width: 50vw;
 }
