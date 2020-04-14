@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/react-square-game/static/css/main.778e8419.chunk.css",
-    "main.js": "/react-square-game/static/js/main.99443045.chunk.js",
-    "main.js.map": "/react-square-game/static/js/main.99443045.chunk.js.map",
+    "main.css": "/react-square-game/static/css/main.09aa95f1.chunk.css",
+    "main.js": "/react-square-game/static/js/main.661f7eb3.chunk.js",
+    "main.js.map": "/react-square-game/static/js/main.661f7eb3.chunk.js.map",
     "runtime-main.js": "/react-square-game/static/js/runtime-main.387ea1f7.js",
     "runtime-main.js.map": "/react-square-game/static/js/runtime-main.387ea1f7.js.map",
-    "static/js/2.87d48963.chunk.js": "/react-square-game/static/js/2.87d48963.chunk.js",
-    "static/js/2.87d48963.chunk.js.map": "/react-square-game/static/js/2.87d48963.chunk.js.map",
+    "static/js/2.a8944988.chunk.js": "/react-square-game/static/js/2.a8944988.chunk.js",
+    "static/js/2.a8944988.chunk.js.map": "/react-square-game/static/js/2.a8944988.chunk.js.map",
     "index.html": "/react-square-game/index.html",
-    "precache-manifest.63eca8958c6a3e3b533707b824b5f814.js": "/react-square-game/precache-manifest.63eca8958c6a3e3b533707b824b5f814.js",
+    "precache-manifest.648dbb31c706c0328f215fd4e1156ef1.js": "/react-square-game/precache-manifest.648dbb31c706c0328f215fd4e1156ef1.js",
     "service-worker.js": "/react-square-game/service-worker.js",
-    "static/css/main.778e8419.chunk.css.map": "/react-square-game/static/css/main.778e8419.chunk.css.map",
-    "static/js/2.87d48963.chunk.js.LICENSE.txt": "/react-square-game/static/js/2.87d48963.chunk.js.LICENSE.txt"
+    "static/css/main.09aa95f1.chunk.css.map": "/react-square-game/static/css/main.09aa95f1.chunk.css.map",
+    "static/js/2.a8944988.chunk.js.LICENSE.txt": "/react-square-game/static/js/2.a8944988.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.387ea1f7.js",
-    "static/js/2.87d48963.chunk.js",
-    "static/css/main.778e8419.chunk.css",
-    "static/js/main.99443045.chunk.js"
+    "static/js/2.a8944988.chunk.js",
+    "static/css/main.09aa95f1.chunk.css",
+    "static/js/main.661f7eb3.chunk.js"
   ]
 }
