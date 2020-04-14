@@ -1,5 +1,6 @@
 import Type from './types';
 import { combineReducers } from 'redux';
+import shortId from 'shortid';
 const blue = 'rgb(0, 102, 255)';
 const red = 'rgb(255, 26, 26)';
 const green = 'rgb(0, 204, 0)';
@@ -81,7 +82,9 @@ const pcReducer = (state = INIT_PC, action) => {
 export const leaderBoardReducer = (state = [], action) => {
   switch (action.type) {
     case Type.GET_WINNERS:
-      return action.winners;
+      return action.winners.reverse();
+    case Type.UPDATE_LEADERBOARD:
+      return [{ ...action.winnerObj, id: shortId() }, ...state];
     default:
       return state;
   }

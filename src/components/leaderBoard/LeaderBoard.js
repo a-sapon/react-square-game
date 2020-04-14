@@ -14,26 +14,32 @@ class LeaderBoard extends Component {
   }
 
   render() {
+    const { winners } = this.props;
     return (
       <>
         <h2 className={style.winnersHdr}>Leader Board</h2>
-        <List className={style.winnersList}>
-          {this.props.winners.map(({ winner, date, id }) => (
-            <ListItem key={id}>
-              <ListItemAvatar>
-                <Avatar>{winner[0].toUpperCase()}</Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={winner} secondary={date} />
-            </ListItem>
-          ))}
-        </List>
+        {winners.length === 0 ? (
+          <div className={style.noWinners}>Play a game to put your name on the Leader Board!</div>
+        ) : (
+          <List className={style.winnersList}>
+            {winners.map(({ winner, date, id }) => (
+              <ListItem key={id}>
+                <ListItemAvatar>
+                  <Avatar>{winner[0].toUpperCase()}</Avatar>
+                </ListItemAvatar>
+                <ListItemText primary={winner} secondary={date} />
+              </ListItem>
+            ))}
+          </List>
+        )}
       </>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  winners: state.leaderBoardReducer
+  winners: state.leaderBoardReducer,
+  update: state.appReducer.mainReducer.update
 });
 
 export default connect(mapStateToProps, { getWinners })(LeaderBoard);

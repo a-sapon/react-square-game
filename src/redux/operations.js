@@ -5,7 +5,8 @@ import {
   fillArrWithBlocks,
   userWins,
   pcWins,
-  fetchWinners
+  fetchWinners,
+  updateLeaderBoard
 } from './actionCreators';
 
 export const getGameSettings = mode => async dispatch => {
@@ -62,31 +63,38 @@ const getCurrentDate = () => {
   return `${hours}:${minutes} — ${month} ${date}, ${year}`;
 };
 
+export const getWinners = () => async dispatch => {
+  const response = await axios.get(
+    'https://starnavi-frontend-test-task.herokuapp.com/winners'
+  );
+  dispatch(fetchWinners(response.data));
+};
+
 const sendWinnerToServer = async winner => {
-  const winnerObj = {
-    winner,
-    date: getCurrentDate()
-  };
   await axios.post(
     'https://starnavi-frontend-test-task.herokuapp.com/winners',
-    winnerObj
+    winner
   );
 };
 
 export const checkWinner = (blocksNum, user, pc) => dispatch => {
   const fiftyPercent = blocksNum * 0.5;
   if (user.points > fiftyPercent) {
+    const winnerObj = {
+      winner: user.name,
+      date: getCurrentDate()
+    };
     dispatch(userWins());
-    sendWinnerToServer(user.name);
-  } else if (pc.points > fiftyPercent) {
-    dispatch(pcWins());
-    sendWinnerToServer(pc.name);
+    dispatch(updateLeaderBoard(winnerObj));
+    sendWinnerToServer(winnerObj);
   }
-};
-
-export const getWinners = () => async dispatch => {
-  const response = await axios.get(
-    'https://starnavi-frontend-test-task.herokuapp.com/winners'
-  );
-  dispatch(fetchWinners(response.data));
+  if (pc.points > fiftyPercent) {
+    const winnerObj = {
+      winner: pc.name,
+      date: getCurrentDate()
+    };
+    dispatch(pcWins());
+    dispatch(updateLeaderBoard(winnerObj));
+    sendWinnerToServer(winnerObj);
+  }
 };

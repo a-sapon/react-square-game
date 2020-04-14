@@ -63,3 +63,8 @@ export const fetchWinners = winners => ({
   type: Type.GET_WINNERS,
   winners
 });
+
+export const updateLeaderBoard = winnerObj => ({
+  type: Type.UPDATE_LEADERBOARD,
+  winnerObj
+});

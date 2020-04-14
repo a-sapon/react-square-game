@@ -9,3 +9,9 @@
   color: #474747;
   margin-bottom: 0;
 }
+
+.noWinners {
+  padding: 30px;
+  font-size: 18px;
+  color: #474747;
+}
